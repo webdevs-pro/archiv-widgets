@@ -32,7 +32,7 @@ class Archiv_Item_Block_Widget extends \Elementor\Widget_Base {
 		return [ 'archiv-page-widgets' ];
 	}
 
-	protected function _register_controls() {
+	protected function register_controls() {
 
 		// SECTION CONTENT
 		$this->start_controls_section( 'section_content', [
@@ -78,7 +78,7 @@ class Archiv_Item_Block_Widget extends \Elementor\Widget_Base {
             echo '<p class="elementor-alert elementor-alert-warning">Select item to display</p>';
          }
          if ( ! get_option( 'archiv_item_block_template' ) || ! is_numeric( get_option( 'archiv_item_block_template' ) ) ) {
-            echo '<p class="elementor-alert elementor-alert-warning">Select AE template to display item</p>';
+            echo '<p class="elementor-alert elementor-alert-warning">Select AE template to display item in Archiv Widgets settings page</p>';
          }
       }
 	}

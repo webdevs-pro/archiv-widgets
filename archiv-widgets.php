@@ -3,7 +3,7 @@
  * Plugin Name: Archiv Widgets
  * Description: Custom Elementor widgets
  * Plugin URI:  https://magnificsoft.com/
- * Version:     0.2.1
+ * Version:     0.2.2
  * Author:      Alex Ischenko
  * Text Domain: archiv-widgets
  */
@@ -13,7 +13,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 // constants
 define( 'ARCHIVE_PLUGIN_DIR_PATH', dirname( __FILE__ ) ); // for php
 define( 'ARCHIVE_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) ); // for assets
-define( 'ARCHIVE_POST_TYPE', 'art_item' ); // for assets
+define( 'ARCHIVE_POST_TYPE', 'art_item' );
+// define( 'ARCHIVE_POST_TYPE', 'post' );
 
 
 // includes
