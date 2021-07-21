@@ -3,7 +3,7 @@
  * Plugin Name: Archiv Widgets
  * Description: Custom Elementor widgets
  * Plugin URI:  https://magnificsoft.com/
- * Version:     0.3
+ * Version:     0.4
  * Author:      Alex Ischenko
  * Text Domain: archiv-widgets
  */
@@ -56,15 +56,27 @@ final class Archiv_Init {
 		// Once we get here, We have passed all validation checks so we can safely include our plugin
 		require_once( 'plugin.php' );
 
-		add_action( 'elementor/elements/categories_registered', function( $elements_manager ) {
-			$elements_manager->add_category(
-				'archiv-page-widgets',
+
+
+		// register dh category
+		add_action( 'elementor/elements/categories_registered', function( \Elementor\Elements_Manager $elements_manager ) {
+			//https://github.com/elementor/elementor/issues/7445#issuecomment-692123467
+			$categories = [];
+			$categories['archiv-page-widgets'] =
 				[
-					'title' => __( 'Archiv Page Widgets', 'archiv-widgets' ),
-					'icon' => 'fa fa-plug',
-				]
-			);
-		});
+					'title' =>  __( 'Archiv Page Widgets', 'archiv-widgets' ),
+					'icon'  => 'fa fa-plug',
+				];
+
+			$old_categories = $elements_manager->get_categories();
+			$categories = array_merge($categories, $old_categories);
+
+			$set_categories = function ( $categories ) {
+				$this->categories = $categories;
+			};
+
+			$set_categories->call( $elements_manager, $categories );
+		} );
 	}
 
 	public function admin_notice_missing_main_plugin() {

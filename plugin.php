@@ -59,7 +59,7 @@ add_action( 'elementor/editor/after_enqueue_scripts', function() {
 
 // print styles to footer
 function archiv_hide_element_controls( $widget, $controls ) {
-	if ( ! array_intersect( ['archiv_basic', 'archiv_basic' ], wp_get_current_user()->roles ) ) return;
+	if ( ! array_intersect( ['archiv_basic', 'archiv_advanced' ], wp_get_current_user()->roles ) ) return;
 	add_action( 'wp_footer', function() use ( $widget, $controls ) {
 
 		// hide controls
@@ -85,7 +85,7 @@ function archiv_hide_element_controls( $widget, $controls ) {
 
 // remove all sections from advanced tab but motion effects
 add_action( 'elementor/element/after_section_start', function( $element, $section_id, $args ) {
-	if ( ! array_intersect( ['archiv_basic', 'archiv_basic' ], wp_get_current_user()->roles ) ) return;
+	if ( ! array_intersect( ['archiv_basic', 'archiv_advanced' ], wp_get_current_user()->roles ) ) return;
 	if ( $element->get_name() == 'common' ) {
 		if ( $section_id != 'section_effects' ) {
 			$control_data = \Elementor\Plugin::instance()->controls_manager->get_control_from_stack( $element->get_name(), $section_id );
@@ -100,7 +100,7 @@ add_action( 'elementor/element/after_section_start', function( $element, $sectio
 
 // remove sticky from motion effects tab
 add_action( 'elementor/element/common/section_effects/before_section_end', function( $element, $args ) {
-	if ( ! array_intersect( ['archiv_basic', 'archiv_basic' ], wp_get_current_user()->roles ) ) return;
+	if ( ! array_intersect( ['archiv_basic', 'archiv_advanced' ], wp_get_current_user()->roles ) ) return;
 	$control_data = \Elementor\Plugin::instance()->controls_manager->get_control_from_stack( $element->get_name(), 'sticky' );
 	$control_data['condition'] = [
 		'some_control' => 'some_value', // something unexisting
@@ -111,7 +111,7 @@ add_action( 'elementor/element/common/section_effects/before_section_end', funct
 
 // remove selfhosted option from video widget
 add_action( 'elementor/element/video/section_video/before_section_end', function( $element, $args ) {
-	if ( ! array_intersect( ['archiv_basic', 'archiv_basic' ], wp_get_current_user()->roles ) ) return;
+	if ( ! array_intersect( ['archiv_basic', 'archiv_advanced' ], wp_get_current_user()->roles ) ) return;
 	$control_data = \Elementor\Plugin::instance()->controls_manager->get_control_from_stack( $element->get_name(), 'video_type' );
 	unset( $control_data['options']['hosted'] );
 	$element->update_control( 'video_type', $control_data );
@@ -120,10 +120,38 @@ add_action( 'elementor/element/video/section_video/before_section_end', function
 
 // remove scc filters from video widget
 add_action( 'elementor/element/video/section_video_style/before_section_end', function( $element, $args ) {
-	if ( ! array_intersect( ['archiv_basic', 'archiv_basic' ], wp_get_current_user()->roles ) ) return;
+	if ( ! array_intersect( ['archiv_basic', 'archiv_advanced' ], wp_get_current_user()->roles ) ) return;
 	$control_data = \Elementor\Plugin::instance()->controls_manager->get_control_from_stack( $element->get_name(), 'css_filters_css_filter' );
 	$control_data['condition'] = [
 		'some_control' => 'some_value', // something unexisting
 	];
 	$element->update_control( 'css_filters_css_filter', $control_data );
 }, 10, 2);
+
+
+// disable pannel widgets for non admin
+add_filter( 'elementor/editor/localize_settings', 'archiv_disable_widgets' );
+function archiv_disable_widgets( $settings ) {
+	error_log( "wp_get_current_user\n" . print_r(wp_get_current_user()->roles, true) . "\n" );
+	if ( ! array_intersect( ['archiv_basic', 'archiv_advanced' ], wp_get_current_user()->roles ) ) return $settings;
+
+	$editor_allowed_widgets = array(
+		'archiv-heading',
+		'archiv-text',
+		'archiv-image',
+		'archiv-item-block',
+		'archiv-blockquote',
+		'video',
+	);
+
+	foreach ( $settings['initial_document']['widgets'] as $widget_name => $widget_settings ) {
+		if ( ! in_array( $widget_name, $editor_allowed_widgets ) ) {
+			$settings['initial_document']['widgets'][$widget_name]['show_in_panel'] = false;
+		}
+	}
+
+	$settings['initial_document']['widgets']['video']['title'] = 'Archiv Video';
+	$settings['initial_document']['widgets']['video']['categories'] = ['archiv-page-widgets'];
+
+	return $settings;
+}
