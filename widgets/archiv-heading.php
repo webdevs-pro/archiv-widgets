@@ -14,18 +14,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 
-class Archiv_Text_Widget extends \Elementor\Widget_Text_Editor {
+class Archiv_Heading extends \Elementor\Widget_Heading {
 
 	public function get_name() {
-		return 'archiv-text';
+		return 'archiv-heading';
 	}
 
 	public function get_title() {
-		return __( 'Archiv Text', 'archiv-widgets' );
+		return __( 'Archiv Heading', 'archiv-widgets' );
 	}
 
 	public function get_icon() {
-		return 'eicon-text';
+		return 'eicon-t-letter';
 	}
 
 	public function get_categories() {
@@ -36,10 +36,10 @@ class Archiv_Text_Widget extends \Elementor\Widget_Text_Editor {
 		parent::register_controls();
 
 		archiv_hide_element_controls( $this, [
-			'drop_cap',
-			'text_columns',
-			'column_gap',
+			'size',
+			'link',
 			'text_shadow_text_shadow_type',
+			'blend_mode',
 		] );
 	}
 

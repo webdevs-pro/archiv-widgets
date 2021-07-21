@@ -1,0 +1,38 @@
+/* .arhiv-hidden-control {
+   display: none;
+} */
+
+/* arhive text widget */
+#elementor-panel-inner[element="archiv-text"] .elementor-control-drop_cap,
+#elementor-panel-inner[element="archiv-text"] .elementor-control-text_columns,
+#elementor-panel-inner[element="archiv-text"] .elementor-control-column_gap,
+#elementor-panel-inner[element="archiv-text"] .elementor-control-text_shadow_text_shadow_type {
+   display: none !important;
+}
+
+/* arhive heading widget */
+#elementor-panel-inner[element="archiv-heading"] .elementor-control-size,
+#elementor-panel-inner[element="archiv-heading"] .elementor-control-link,
+#elementor-panel-inner[element="archiv-heading"] .elementor-control-blend_mode,
+#elementor-panel-inner[element="archiv-heading"] .elementor-control-text_shadow_text_shadow_type {
+   display: none !important;
+}
+
+/* arhive image widget */
+#elementor-panel-inner[element="archiv-image"] .elementor-control-link_to,
+#elementor-panel-inner[element="archiv-image"] .elementor-control-link,
+#elementor-panel-inner[element="archiv-image"] .elementor-control-separator_panel_style,
+#elementor-panel-inner[element="archiv-image"] .elementor-control-image_effects,
+#elementor-panel-inner[element="archiv-image"] .elementor-control-opacity,
+#elementor-panel-inner[element="archiv-image"] .elementor-control-css_filters_css_filter,
+#elementor-panel-inner[element="archiv-image"] .elementor-control-image_border_border,
+#elementor-panel-inner[element="archiv-image"] .elementor-control-image_box_shadow_box_shadow_type,
+#elementor-panel-inner[element="archiv-image"] .elementor-control-caption_background_color,
+#elementor-panel-inner[element="archiv-image"] .elementor-control-caption_text_shadow_text_shadow_type,
+#elementor-panel-inner[element="archiv-image"] .elementor-control-caption_space,
+#elementor-panel-inner[element="archiv-heading"] .elementor-control-open_lightbox {
+   display: none !important;
+}
+
+
+
