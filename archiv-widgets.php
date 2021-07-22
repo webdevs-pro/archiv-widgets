@@ -3,7 +3,7 @@
  * Plugin Name: Archiv Widgets
  * Description: Custom Elementor widgets
  * Plugin URI:  https://magnificsoft.com/
- * Version:     0.4
+ * Version:     0.5
  * Author:      Alex Ischenko
  * Text Domain: archiv-widgets
  */
@@ -14,7 +14,6 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 define( 'ARCHIVE_PLUGIN_DIR_PATH', dirname( __FILE__ ) ); // for php
 define( 'ARCHIVE_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) ); // for assets
 define( 'ARCHIVE_POST_TYPE', 'art_item' );
-// define( 'ARCHIVE_POST_TYPE', 'post' );
 
 
 // includes
@@ -22,10 +21,10 @@ require_once ( ARCHIVE_PLUGIN_DIR_PATH . '/admin/admin.php' );
 
 
 // main class
-final class Archiv_Init {
+final class Archiv_Widgets_Init {
 
-	const MINIMUM_ELEMENTOR_VERSION = '3.0.0';
-	const MINIMUM_PHP_VERSION = '7.0';
+	const MINIMUM_ELEMENTOR_VERSION = '3.2.0';
+	const MINIMUM_PHP_VERSION = '7.3';
 
 	public function __construct() {
 		add_action( 'init', array( $this, 'i18n' ) );
@@ -57,19 +56,17 @@ final class Archiv_Init {
 		require_once( 'plugin.php' );
 
 
-
-		// register dh category
+		// register archiv category
 		add_action( 'elementor/elements/categories_registered', function( \Elementor\Elements_Manager $elements_manager ) {
 			//https://github.com/elementor/elementor/issues/7445#issuecomment-692123467
 			$categories = [];
-			$categories['archiv-page-widgets'] =
-				[
-					'title' =>  __( 'Archiv Page Widgets', 'archiv-widgets' ),
-					'icon'  => 'fa fa-plug',
-				];
+			$categories['archiv-page-widgets'] = [
+				'title' =>  __( 'Archiv Page Widgets', 'archiv-widgets' ),
+				'icon'  => 'fa fa-plug',
+			];
 
 			$old_categories = $elements_manager->get_categories();
-			$categories = array_merge($categories, $old_categories);
+			$categories = array_merge( $categories, $old_categories );
 
 			$set_categories = function ( $categories ) {
 				$this->categories = $categories;
@@ -117,15 +114,4 @@ final class Archiv_Init {
 		printf( '<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $message );
 	}
 }
-new Archiv_Init();
-
-
-// plugin updates
-require 'vendor/plugin-update-checker/plugin-update-checker.php';
-$myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
-	'https://github.com/webdevs-pro/archiv-widgets',
-	__FILE__,
-	'archiv-widgets'
-);
-//Set the branch that contains the stable release.
-$myUpdateChecker->setBranch('main');
+new Archiv_Widgets_Init();

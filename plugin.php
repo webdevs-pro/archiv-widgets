@@ -7,10 +7,6 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 class Archiv_Register_Widgets {
 
 	public function __construct() {
-		$this->add_actions();
-	}
-
-	private function add_actions() {
 		add_action( 'elementor/widgets/widgets_registered', [ $this, 'on_widgets_registered' ] );
 		add_action( 'elementor/frontend/after_enqueue_styles', function() {
 			wp_enqueue_style( 'archiv-widgets', plugins_url( '/assets/archiv-widgets.css', __FILE__ ), array() ); 
