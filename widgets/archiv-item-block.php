@@ -1,12 +1,8 @@
 <?php
 
-use Elementor\Widget_Base;
+
 use Elementor\Controls_Manager;
-use Elementor\Group_Control_Typography;
-use Elementor\Group_Control_Background;
-use Elementor\Group_Control_Border;
-use Elementor\Scheme_Typography;
-use Elementor\Group_Control_Text_Shadow;
+
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -21,7 +17,7 @@ class Archiv_Item_Block_Widget extends \Elementor\Widget_Base {
 	}
 
 	public function get_title() {
-		return __( 'Item', 'archiv-widgets' );
+		return __( 'Archiv Item', 'archiv-widgets' );
 	}
 
 	public function get_icon() {
@@ -33,13 +29,10 @@ class Archiv_Item_Block_Widget extends \Elementor\Widget_Base {
 	}
 
 	protected function register_controls() {
-
-		// SECTION CONTENT
 		$this->start_controls_section( 'section_content', [
          'label' => __( 'Content', 'archiv-widgets' ),
-         'tab' => Controls_Manager::TAB_CONTENT,
+         'tab' => Elementor\Controls_Manager::TAB_CONTENT,
       ]);
-
 
       $this->add_control(
          'post_id', [
@@ -58,11 +51,7 @@ class Archiv_Item_Block_Widget extends \Elementor\Widget_Base {
          ]
       );
 
-
 		$this->end_controls_section(); 
-
-
-
 	}
 
 

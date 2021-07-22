@@ -1,13 +1,5 @@
 <?php
 
-use Elementor\Widget_Base;
-use Elementor\Controls_Manager;
-use Elementor\Group_Control_Typography;
-use Elementor\Group_Control_Background;
-use Elementor\Group_Control_Border;
-use Elementor\Scheme_Typography;
-use Elementor\Group_Control_Text_Shadow;
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -55,7 +47,7 @@ class Archiv_Blockquote extends ElementorPro\Modules\Blockquote\Widgets\Blockquo
 
 		// update blockquote editor
 		$control_data = \Elementor\Plugin::instance()->controls_manager->get_control_from_stack( $this->get_name(), 'blockquote_content' );
-		$control_data['type'] = Controls_Manager::WYSIWYG;
+		$control_data['type'] = Elementor\Controls_Manager::WYSIWYG;
 		$control_data['tweet_button']['default'] = '';
 		$this->update_control( 'blockquote_content', $control_data );
 
@@ -63,10 +55,7 @@ class Archiv_Blockquote extends ElementorPro\Modules\Blockquote\Widgets\Blockquo
 		$control_data = \Elementor\Plugin::instance()->controls_manager->get_control_from_stack( $this->get_name(), 'tweet_button' );
 		$control_data['default'] = '';
 		$this->update_control( 'tweet_button', $control_data );
-
-
 	}
 
-	
 }
 

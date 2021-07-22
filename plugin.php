@@ -69,14 +69,25 @@ function archiv_hide_element_controls( $widget, $controls ) {
 		// panel styles for editor
 		echo '<style id="archiv-panel-styles">
 			.elementor-panel-category-title {
-				display: none;
+				display: none !important;
 			}
 			.elementor-panel-category {
 				margin-bottom: 10px;
 			}
 		</style>';
 	} );
+
 }
+
+
+// hide templates edit handels
+add_action( 'elementor/preview/enqueue_styles', function() {
+	echo '<style id="archiv-editor-styles">
+		.elementor-editor-active .elementor:not(.elementor-edit-mode):hover .elementor-document-handle {
+			display: none !important;
+		}
+	</style>';
+}, 10 );
 
 
 // remove all sections from advanced tab but motion effects
@@ -128,7 +139,6 @@ add_action( 'elementor/element/video/section_video_style/before_section_end', fu
 // disable pannel widgets for non admin
 add_filter( 'elementor/editor/localize_settings', 'archiv_disable_widgets' );
 function archiv_disable_widgets( $settings ) {
-	error_log( "wp_get_current_user\n" . print_r(wp_get_current_user()->roles, true) . "\n" );
 	if ( ! array_intersect( ['archiv_basic', 'archiv_advanced' ], wp_get_current_user()->roles ) ) return $settings;
 
 	$editor_allowed_widgets = array(

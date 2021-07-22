@@ -1,13 +1,5 @@
 <?php
 
-use Elementor\Widget_Base;
-use Elementor\Controls_Manager;
-use Elementor\Group_Control_Typography;
-use Elementor\Group_Control_Background;
-use Elementor\Group_Control_Border;
-use Elementor\Scheme_Typography;
-use Elementor\Group_Control_Text_Shadow;
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -35,7 +27,6 @@ class Archiv_Image extends \Elementor\Widget_Image {
 	protected function register_controls() {
 		parent::register_controls();
 
-		// hide controls
 		archiv_hide_element_controls( $this, [
 			'link_to',
 			'link',
@@ -62,10 +53,7 @@ class Archiv_Image extends \Elementor\Widget_Image {
 			'custom' => __( 'Custom Caption', 'elementor' ),
 		];
 		$this->update_control( 'caption_source', $control_data );
-
-
 	}
 
-	
 }
 

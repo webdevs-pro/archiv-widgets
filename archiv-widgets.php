@@ -3,7 +3,7 @@
  * Plugin Name: Archiv Widgets
  * Description: Custom Elementor widgets
  * Plugin URI:  https://magnificsoft.com/
- * Version:     0.5
+ * Version:     1.0
  * Author:      Alex Ischenko
  * Text Domain: archiv-widgets
  */
