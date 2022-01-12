@@ -74,6 +74,9 @@ function archiv_hide_element_controls( $widget, $controls ) {
 			.elementor-panel-category {
 				margin-bottom: 10px;
 			}
+			#elementor-panel-category-favorites {
+				display: none !important;
+			}
 		</style>';
 	} );
 
@@ -125,7 +128,7 @@ add_action( 'elementor/element/video/section_video/before_section_end', function
 }, 10, 2);
 
 
-// remove scc filters from video widget
+// remove css filters from video widget
 add_action( 'elementor/element/video/section_video_style/before_section_end', function( $element, $args ) {
 	if ( ! array_intersect( ['archiv_basic', 'archiv_advanced' ], wp_get_current_user()->roles ) ) return;
 	$control_data = \Elementor\Plugin::instance()->controls_manager->get_control_from_stack( $element->get_name(), 'css_filters_css_filter' );
@@ -148,6 +151,8 @@ function archiv_disable_widgets( $settings ) {
 		'archiv-item-block',
 		'archiv-blockquote',
 		'video',
+		'spacer',
+		'divider',
 	);
 
 	foreach ( $settings['initial_document']['widgets'] as $widget_name => $widget_settings ) {
